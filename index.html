@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="IAM: Identity-Aware Human Motion and Shape Joint Generation">
+  <meta name="keywords" content="Human Motion Generation, Body Shape, Multimodal, Identity-Aware">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IAM: Identity-Aware Human Motion and Shape Joint Generation</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero bg-section">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <div class="title-wrapper">
+
+          <h1 class="title is-1 publication-title">
+            <span style="color: #1f7fbe;">IAM:</span> Identity-Aware Human <span style="color: #1f7fbe;">M</span>otion and Shape Joint Generation
+          </h1>
+
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://vjwq.github.io/">Wenqi Jia</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Zekun Li</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="#">Abhay Mittal</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Chengcheng Tang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Chuan Guo</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Lezi Wang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://rehg.org/">James Matthew Rehg</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Lingling Tao</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Sizhe An</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block" style="margin-right: 1rem;"><sup>1</sup>UIUC</span>
+            <span class="author-block" style="margin-right: 1rem;"><sup>2</sup>Meta Reality Labs</span>
+            <span class="author-block"><sup>3</sup>Brown University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2503.23300"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2503.23300"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="assets/demo.mp4"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Demo</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/VJWQ/VCR.git"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://ego-exo4d-data.org/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/teaser.png"
+           alt="IAM teaser figure showing identity-consistent motion generation."
+           style="width: 100%; height: auto;">
+      <h2 class="subtitle has-text-centered">
+        <b>Identity-Consistent Motion Generation.</b> Our framework enables decoupled control of
+        action dynamics and subject morphology. Given identity cues and motion prompts, the model
+        synthesizes diverse body shapes while producing motions that remain physically consistent
+        with body morphology.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<!-- <section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/steve.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/chair-tp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/shiba.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/fullbody.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/blueshirt.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-mask">
+          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/mask.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/coffee.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/toby2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recent advances in text-driven human motion generation enable models to synthesize realistic
+            motion sequences from natural language descriptions. However, most existing approaches assume
+            identity-neutral motion and generate movements using a canonical body representation, ignoring
+            the strong influence of body morphology on motion dynamics. In practice, attributes such as body
+            proportions, mass distribution, and age significantly affect how actions are performed, and
+            neglecting this coupling often leads to physically inconsistent motions.
+          </p>
+          <p>
+            We propose an identity-aware motion generation framework that explicitly models the relationship
+            between body morphology and motion dynamics. Instead of relying on explicit geometric measurements,
+            identity is represented using multimodal signals, including natural language descriptions and visual
+            cues. We further introduce a joint motion-shape generation paradigm that simultaneously synthesizes
+            motion sequences and body shape parameters, allowing identity cues to directly modulate motion dynamics.
+          </p>
+          <p>
+            Extensive experiments on motion capture datasets and large-scale in-the-wild videos demonstrate
+            improved motion realism and motion-identity consistency while maintaining high motion quality.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Fig. 2. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Framework</h2>
+        <div class="content">
+          <img src="./static/images/framework.png"
+               alt="Figure 2: Overview of the proposed framework."
+               style="width: 100%; height: auto;">
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            (a) Data Processing Pipeline: We extract motion sequences M, shape parameters beta,
+            and multimodal identity descriptions (Ti, Ii) from diverse sources including in-the-wild
+            videos and MoCap data. (b) Motion-Shape Generation: A multimodal identity conditioning
+            framework integrates textual and visual priors through frozen encoders to jointly generate
+            identity-consistent motion sequences and body shapes via a diffusion model.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Fig. 2. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Qualitative Results on HumanML3D</h2>
+        <div class="content has-text-justified">
+          <p>
+            We compare IAM (Diffusion) with VQ-based IAM and Shape My Moves. Each case keeps the same
+            motion prompt and identity prompt across methods.
+          </p>
+        </div>
+
+        <div class="content">
+          <h3 class="title is-5">Case 1</h3>
+          <p><b>Motion Prompt:</b> "a person throws something with their right hand hard"</p>
+          <p><b>Identity Prompt:</b> "a male with a lean, athletic build"</p>
+          <div class="columns">
+            <div class="column has-text-centered">
+              <p><b>Shape My Moves</b></p>
+              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
+            </div>
+            <div class="column has-text-centered">
+              <p><b>Ours (VQ)</b></p>
+              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
+            </div>
+            <div class="column has-text-centered">
+              <p><b>Ours (Diffusion)</b></p>
+              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
+            </div>
+          </div>
+        </div>
+
+        <div class="content">
+          <h3 class="title is-5">Case 2</h3>
+          <p><b>Motion Prompt:</b> "a person jumps and spin in the air"</p>
+          <p><b>Identity Prompt:</b> "a female with a short, average build"</p>
+          <div class="columns">
+            <div class="column has-text-centered">
+              <p><b>Shape My Moves</b></p>
+              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
+            </div>
+            <div class="column has-text-centered">
+              <p><b>Ours (VQ)</b></p>
+              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
+            </div>
+            <div class="column has-text-centered">
+              <p><b>Ours (Diffusion)</b></p>
+              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
+            </div>
+          </div>
+        </div>
+
+        <div class="content">
+          <h3 class="title is-5">Case 3</h3>
+          <p><b>Motion Prompt:</b> "a person goes into a short jog before stopping"</p>
+          <p><b>Identity Prompt:</b> "a male with a lean, average build"</p>
+          <div class="columns">
+            <div class="column has-text-centered">
+              <p><b>Shape My Moves</b></p>
+              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
+            </div>
+            <div class="column has-text-centered">
+              <p><b>Ours (VQ)</b></p>
+              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
+            </div>
+            <div class="column has-text-centered">
+              <p><b>Ours (Diffusion)</b></p>
+              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
+            </div>
+          </div>
+        </div>
+
+        <div class="content">
+          <h3 class="title is-5">Case 4</h3>
+          <p><b>Motion Prompt:</b> "a person kicks with the left foot"</p>
+          <p><b>Identity Prompt:</b> "a female with a slim build. she is tall, with long torso and legs"</p>
+          <div class="columns">
+            <div class="column has-text-centered">
+              <p><b>Shape My Moves</b></p>
+              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
+            </div>
+            <div class="column has-text-centered">
+              <p><b>Ours (VQ)</b></p>
+              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
+            </div>
+            <div class="column has-text-centered">
+              <p><b>Ours (Diffusion)</b></p>
+              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-light zero-shot-section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Zero-shot Motion Generation on Unseen IdentityMotion Test Set</h2>
+        <div class="content has-text-justified">
+          <p style="color: black; font-style: normal;">
+            Side-by-side comparison between Shape My Moves and IAM on unseen identities. Identity conditioning
+            follows the paper: each example uses a <b>text</b> identity description together with a
+            <b>reference image</b> (identity keyframe from the source video).
+          </p>
+        </div>
+
+        <div class="zero-shot-carousel">
+          <button class="zero-shot-nav prev" type="button" aria-label="Previous example">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </button>
+          <div class="zero-shot-slides">
+            <article class="zero-shot-slide is-active">
+              <div class="zero-shot-card">
+                <div class="zero-shot-left">
+                  <div class="prompt-box motion">
+                    <div class="prompt-title">Motion Prompt:</div>
+                    <div class="prompt-text">"A person jogs forward."</div>
+                  </div>
+                  <div class="prompt-box identity">
+                    <div class="prompt-title">Identity Prompt:</div>
+                    <div class="identity-content">
+                      <img src="./static/images/jog-female.png" alt="Reference image for identity conditioning (Case 1)." class="identity-reference-image">
+                      <div class="prompt-text">"A young adult female with a plus-size, heavy build."</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="zero-shot-right">
+                  <div class="result-item">
+                    <h4>Shape My Move</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/zero/jog-smm.mp4" type="video/mp4"></video>
+                  </div>
+                  <div class="result-item">
+                    <h4>Ours</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/zero/jog-iam.mp4" type="video/mp4"></video>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="zero-shot-slide">
+              <div class="zero-shot-card">
+                <div class="zero-shot-left">
+                  <div class="prompt-box motion">
+                    <div class="prompt-title">Motion Prompt:</div>
+                    <div class="prompt-text">"A person sits on a bicycle and pedals forward, their legs moving in a continuous, alternating circular motion as they hold the handlebars and ride along a path."</div>
+                  </div>
+                  <div class="prompt-box identity">
+                    <div class="prompt-title">Identity Prompt:</div>
+                    <div class="identity-content">
+                      <img src="./static/images/bike-female.png" alt="Reference image for identity conditioning (Case 2)." class="identity-reference-image">
+                      <div class="prompt-text">"A young adult female with a slim, athletic build. She has dark hair tied back in a ponytail."</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="zero-shot-right">
+                  <div class="result-item">
+                    <h4>Shape My Move</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/zero/bike-smm.mp4" type="video/mp4"></video>
+                  </div>
+                  <div class="result-item">
+                    <h4>Ours</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/zero/bike-iam.mp4" type="video/mp4"></video>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="zero-shot-slide">
+              <div class="zero-shot-card">
+                <div class="zero-shot-left">
+                  <div class="prompt-box motion">
+                    <div class="prompt-title">Motion Prompt:</div>
+                    <div class="prompt-text">"A person stands holding a long-handled rake. They push the rake forward into a smoking pile on the ground, then pull it back, spreading the ashes. They repeat this motion."</div>
+                  </div>
+                  <div class="prompt-box identity">
+                    <div class="prompt-title">Identity Prompt:</div>
+                    <div class="identity-content">
+                      <img src="./static/images/rake-male.png" alt="Reference image for identity conditioning (Case 3)." class="identity-reference-image">
+                      <div class="prompt-text">"An older adult male with a stocky build, bald on top with hair on the sides."</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="zero-shot-right">
+                  <div class="result-item">
+                    <h4>Shape My Move</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/zero/rake-smm.mp4" type="video/mp4"></video>
+                  </div>
+                  <div class="result-item">
+                    <h4>Ours</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/zero/rake-iam.mp4" type="video/mp4"></video>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="zero-shot-slide">
+              <div class="zero-shot-card">
+                <div class="zero-shot-left">
+                  <div class="prompt-box motion">
+                    <div class="prompt-title"><b>Motion Prompt:</b><br></div>
+                    <br><br>
+                    <div class="prompt-text">"A person walks at a medium pace across a vast, flat, snow-covered frozen lake on an overcast day."</div>
+                  </div>
+                  <br><br><br>
+                  <div class="prompt-box identity">
+                    <div class="prompt-title"><b>Identity Prompt:</b><br></div>
+                    <br><br>
+                    <div class="identity-content">
+                      <img src="./static/images/snow-male.png" alt="Reference image for identity conditioning (Case 4)." class="identity-reference-image">
+                      <div class="prompt-text">"An older adult male with a white beard, of average height and build. He is wearing heavy winter clothing, including a parka, snow pants, a hat, and gloves, and is carrying a large backpack."</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="zero-shot-right">
+                  <div class="result-item">
+                    <h4>Shape My Move</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/zero/snow-smm.mp4" type="video/mp4"></video>
+                  </div>
+                  <div class="result-item">
+                    <h4>Ours</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/zero/snow-iam.mp4" type="video/mp4"></video>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <button class="zero-shot-nav next" type="button" aria-label="Next example">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </button>
+          <div class="zero-shot-dots" aria-label="Zero-shot example navigation"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section controllable-section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Identity-Controllable Generation</h2>
+        <div class="content has-text-justified">
+          <p style="color: black; font-style: normal;">
+            Given the same motion prompt, IAM generates diverse identity-consistent motions for different body types.
+            <!-- Note: image inputs are omitted in this section. -->
+          </p>
+        </div>
+
+        <div class="content">
+          <!-- <h3 class="title is-5">Motion Prompt 1</h3> -->
+          <p>"A person hesitantly walks across a wobbly rope bridge at an outdoor adventure park, holding onto the overhead safety harness for balance."</p>
+          <div class="columns is-multiline">
+            <div class="column is-one-fifth has-text-centered"><p>Young adult female, slender build</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/bridge-slim-female.mp4" type="video/mp4"></video></div>
+            <div class="column is-one-fifth has-text-centered"><p>Young adult male, slender build</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/bridge-slim-male.mp4" type="video/mp4"></video></div>
+            <div class="column is-one-fifth has-text-centered"><p>Muscular adult male</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/bridge-slim-male.mp4" type="video/mp4"></video></div>
+            <div class="column is-one-fifth has-text-centered"><p>Older adult female, heavy-set build</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/bridge-heavy-set-female.mp4" type="video/mp4"></video></div>
+            <div class="column is-one-fifth has-text-centered"><p>Older adult male, overweight build</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/bridge-overweight-male.mp4" type="video/mp4"></video></div>
+          </div>
+        </div>
+
+        <div class="content">
+          <!-- <h3 class="title is-5">Motion Prompt 2</h3> -->
+          <p>"A person performs a cheerful dance on a white background, swaying their hips and moving their arms."</p>
+          <div class="columns is-multiline">
+            <div class="column is-one-fifth has-text-centered"><p>Young adult female, slender build</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/dance-slim-female.mp4" type="video/mp4"></video></div>
+            <div class="column is-one-fifth has-text-centered"><p>Young adult male, slender build</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/dance-slim-male.mp4" type="video/mp4"></video></div>
+            <div class="column is-one-fifth has-text-centered"><p>Muscular adult male</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/dance-muscular-male.mp4" type="video/mp4"></video></div>
+            <div class="column is-one-fifth has-text-centered"><p>Older adult female, heavy-set build</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/dance-heavy-set-female.mp4" type="video/mp4"></video></div>
+            <div class="column is-one-fifth has-text-centered"><p>Older adult male, overweight build</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/dance-overweight-male.mp4" type="video/mp4"></video></div>
+          </div>
+        </div>
+
+        <div class="content">
+          <!-- <h3 class="title is-5">Motion Prompt 3</h3> -->
+          <p>"A person walks forward holding bricks with both hands."</p>
+          <div class="columns is-multiline">
+            <div class="column is-one-fifth has-text-centered"><p>Young adult female, slender build</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/brick-slim-female.mp4" type="video/mp4"></video></div>
+            <div class="column is-one-fifth has-text-centered"><p>Young adult male, slender build</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/brick-slim-male.mp4" type="video/mp4"></video></div>
+            <div class="column is-one-fifth has-text-centered"><p>Muscular adult male</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/brick-muscular-male.mp4" type="video/mp4"></video></div>
+            <div class="column is-one-fifth has-text-centered"><p>Older adult female, heavy-set build</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/brick-heavy-set-female.mp4" type="video/mp4"></video></div>
+            <div class="column is-one-fifth has-text-centered"><p>Older adult male, overweight build</p><video controls muted loop playsinline width="100%"><source src="./static/videos/controllable/brick-overweight-male.mp4" type="video/mp4"></video></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{jia2026iam,
+  author    = {Jia, Wenqi and Li, Zekun and Mittal, Abhay and Tang, Chengcheng and Guo, Chuan and Wang, Lezi and Rehg, James M. and Tao, Lingling and An, Sizhe},
+  title     = {IAM: Identity-Aware Human Motion and Shape Joint Generation},
+  journal   = {arXiv preprint},
+  year      = {2026},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const zeroShotCarousel = document.querySelector('.zero-shot-carousel');
+    if (zeroShotCarousel) {
+      const slides = Array.from(zeroShotCarousel.querySelectorAll('.zero-shot-slide'));
+      const prevBtn = zeroShotCarousel.querySelector('.zero-shot-nav.prev');
+      const nextBtn = zeroShotCarousel.querySelector('.zero-shot-nav.next');
+      const dotsWrap = zeroShotCarousel.querySelector('.zero-shot-dots');
+      let currentIdx = 0;
+
+      function renderSlide() {
+        slides.forEach(function (slide, idx) {
+          slide.classList.toggle('is-active', idx === currentIdx);
+        });
+        const dots = Array.from(dotsWrap.querySelectorAll('.zero-shot-dot'));
+        dots.forEach(function (dot, idx) {
+          dot.classList.toggle('is-active', idx === currentIdx);
+        });
+      }
+
+      slides.forEach(function (_, idx) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'zero-shot-dot';
+        dot.setAttribute('aria-label', 'Go to zero-shot case ' + (idx + 1));
+        dot.addEventListener('click', function () {
+          currentIdx = idx;
+          renderSlide();
+        });
+        dotsWrap.appendChild(dot);
+      });
+
+      prevBtn.addEventListener('click', function () {
+        currentIdx = (currentIdx - 1 + slides.length) % slides.length;
+        renderSlide();
+      });
+
+      nextBtn.addEventListener('click', function () {
+        currentIdx = (currentIdx + 1) % slides.length;
+        renderSlide();
+      });
+
+      renderSlide();
+    }
+
+    const videos = document.querySelectorAll('video');
+    videos.forEach(function (video) {
+      video.setAttribute('autoplay', '');
+      video.setAttribute('loop', '');
+      video.autoplay = true;
+      video.loop = true;
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(function () {
+          // Ignore autoplay blocking errors from browser policy.
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
