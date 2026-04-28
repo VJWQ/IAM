@@ -8,20 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>IAM: Identity-Aware Human Motion and Shape Joint Generation</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
-
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
 
@@ -92,7 +78,7 @@
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="https://arxiv.org/pdf/2503.23300"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -100,9 +86,9 @@
                   </span>
                   <span>Paper</span>
                 </a>
-              </span>
+              </span> -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2503.23300"
+                <a href="https://arxiv.org/abs/2604.28"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -111,7 +97,7 @@
                 </a>
               </span>
               <!-- Video Link. -->
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="assets/demo.mp4"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -119,26 +105,17 @@
                   </span>
                   <span>Demo</span>
                 </a>
-              </span>
+              </span> -->
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/VJWQ/VCR.git"
+                <a href="https://github.com/VJWQ/IAM.git"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code</span>
+                  <span>Code (Coming Soon)</span>
                   </a>
               </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href="https://ego-exo4d-data.org/"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Data</span>
-                  </a>
             </div>
           </div>
           </div>
@@ -154,8 +131,9 @@
       <img src="./static/images/teaser.png"
            alt="IAM teaser figure showing identity-consistent motion generation."
            style="width: 100%; height: auto;">
-      <h2 class="subtitle has-text-centered">
-        <b>Identity-Consistent Motion Generation.</b> Our framework enables decoupled control of
+      <h2 class="subtitle has-text-left">
+        <!-- <b>Identity-Consistent Motion Generation.</b> Our framework  -->
+        <b><i>Identity-Consistent Motion Generation</i></b> enables decoupled control of
         action dynamics and subject morphology. Given identity cues and motion prompts, the model
         synthesizes diverse body shapes while producing motions that remain physically consistent
         with body morphology.
@@ -263,11 +241,13 @@
                alt="Figure 2: Overview of the proposed framework."
                style="width: 100%; height: auto;">
         </div>
-        <div class="content has-text-justified">
+        <div class="content has-text-left">
           <p>
-            (a) Data Processing Pipeline: We extract motion sequences M, shape parameters beta,
-            and multimodal identity descriptions (Ti, Ii) from diverse sources including in-the-wild
-            videos and MoCap data. (b) Motion-Shape Generation: A multimodal identity conditioning
+            (a) <b>Data Processing Pipeline</b>: We extract motion sequences M, shape parameters beta,
+            and multimodal identity descriptions (Ti, Ii) from diverse sources (in-the-wild
+            videos or MoCap data). 
+            <br>
+            (b) <b>Motion-Shape Generation</b>: A multimodal identity conditioning
             framework integrates textual and visual priors through frozen encoders to jointly generate
             identity-consistent motion sequences and body shapes via a diffusion model.
           </p>
@@ -291,96 +271,162 @@
 </section>
 
 
-<section class="section">
+<section class="section humanml-section">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3">Qualitative Results on HumanML3D</h2>
         <div class="content has-text-justified">
-          <p>
+          <p style="color: #6b7280; font-style: normal;">
             We compare IAM (Diffusion) with VQ-based IAM and Shape My Moves. Each case keeps the same
             motion prompt and identity prompt across methods.
           </p>
         </div>
+        <div class="humanml-carousel">
+          <button class="humanml-nav prev" type="button" aria-label="Previous HumanML3D example">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </button>
+          <div class="humanml-slides">
+            <article class="humanml-slide is-active">
+              <div class="humanml-card">
+                <div class="humanml-prompts">
+                  <div class="prompt-box motion humanml-prompt-box">
+                    <div class="prompt-title">Motion Prompt:</div>
+                    <br><br>
+                    <div class="prompt-text">"a person throws something with their right hand hard"</div>
+                  </div>
+                  <div class="prompt-box identity humanml-prompt-box">
+                    <div class="prompt-title">Identity Prompt:</div>
+                    <div class="humanml-identity-content">
+                      <img src="./static/images/h3d-1.png" alt="" class="identity-reference-image">
+                      <div class="prompt-text">"a male with a lean, athletic build"</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="humanml-results">
+                  <div class="result-item humanml-result-item">
+                    <h4>Ours</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/h3d/h3d-1-iam.mp4" type="video/mp4"></video>
+                  </div>
+                  <div class="result-item humanml-result-item">
+                    <h4>VQ Based</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/h3d/h3d-1-vq.mp4" type="video/mp4"></video>
+                  </div>
+                  <div class="result-item humanml-result-item">
+                    <h4>Shape My Move</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/h3d/h3d-1-smm.mp4" type="video/mp4"></video>
+                  </div>
+                </div>
+              </div>
+            </article>
 
-        <div class="content">
-          <h3 class="title is-5">Case 1</h3>
-          <p><b>Motion Prompt:</b> "a person throws something with their right hand hard"</p>
-          <p><b>Identity Prompt:</b> "a male with a lean, athletic build"</p>
-          <div class="columns">
-            <div class="column has-text-centered">
-              <p><b>Shape My Moves</b></p>
-              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
-            </div>
-            <div class="column has-text-centered">
-              <p><b>Ours (VQ)</b></p>
-              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
-            </div>
-            <div class="column has-text-centered">
-              <p><b>Ours (Diffusion)</b></p>
-              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
-            </div>
-          </div>
-        </div>
+            <article class="humanml-slide">
+              <div class="humanml-card">
+                <div class="humanml-prompts">
+                  <div class="prompt-box motion humanml-prompt-box">
+                    <div class="prompt-title">Motion Prompt:</div>
+                    <br><br>
+                    <div class="prompt-text">"a person jumps and spin in the air"</div>
+                  </div>
+                  <div class="prompt-box identity humanml-prompt-box">
+                    <div class="prompt-title">Identity Prompt:</div>
+                    <div class="humanml-identity-content">
+                        <img src="./static/images/h3d-2.png" alt="" class="identity-reference-image">
+                      <div class="prompt-text">"a female with a short, average build"</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="humanml-results">
+                  <div class="result-item humanml-result-item">
+                    <h4>Ours</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/h3d/h3d-2-iam.mp4" type="video/mp4"></video>
+                  </div>
+                  <div class="result-item humanml-result-item">
+                    <h4>VQ Based</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/h3d/h3d-2-vq.mp4" type="video/mp4"></video>
+                  </div>
+                  <div class="result-item humanml-result-item">
+                    <h4>Shape My Move</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/h3d/h3d-2-smm.mp4" type="video/mp4"></video>
+                  </div>
+                </div>
+              </div>
+            </article>
 
-        <div class="content">
-          <h3 class="title is-5">Case 2</h3>
-          <p><b>Motion Prompt:</b> "a person jumps and spin in the air"</p>
-          <p><b>Identity Prompt:</b> "a female with a short, average build"</p>
-          <div class="columns">
-            <div class="column has-text-centered">
-              <p><b>Shape My Moves</b></p>
-              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
-            </div>
-            <div class="column has-text-centered">
-              <p><b>Ours (VQ)</b></p>
-              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
-            </div>
-            <div class="column has-text-centered">
-              <p><b>Ours (Diffusion)</b></p>
-              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
-            </div>
-          </div>
-        </div>
+            <article class="humanml-slide">
+              <div class="humanml-card">
+                <div class="humanml-prompts">
+                  <div class="prompt-box motion humanml-prompt-box">
+                    <div class="prompt-title">Motion Prompt:</div>
+                    <br><br>
+                    <div class="prompt-text">"a person goes into a short jog before stopping"</div>
+                  </div>
+                  <div class="prompt-box identity humanml-prompt-box">
+                    <div class="prompt-title">Identity Prompt:</div>
+                    <div class="humanml-identity-content">
+                        <img src="./static/images/h3d-3.png" alt="" class="identity-reference-image">
+                      <div class="prompt-text">"a male with a lean, average build"</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="humanml-results">
+                  <div class="result-item humanml-result-item">
+                    <h4>Ours</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/h3d/h3d-3-iam.mp4" type="video/mp4"></video>
+                  </div>
+                  <div class="result-item humanml-result-item">
+                    <h4>VQ Based</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/h3d/h3d-3-vq.mp4" type="video/mp4"></video>
+                  </div>
+                  <div class="result-item humanml-result-item">
+                    <h4>Shape My Move</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/h3d/h3d-3-smm.mp4" type="video/mp4"></video>
+                  </div>
+                </div>
+              </div>
+            </article>
 
-        <div class="content">
-          <h3 class="title is-5">Case 3</h3>
-          <p><b>Motion Prompt:</b> "a person goes into a short jog before stopping"</p>
-          <p><b>Identity Prompt:</b> "a male with a lean, average build"</p>
-          <div class="columns">
-            <div class="column has-text-centered">
-              <p><b>Shape My Moves</b></p>
-              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
-            </div>
-            <div class="column has-text-centered">
-              <p><b>Ours (VQ)</b></p>
-              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
-            </div>
-            <div class="column has-text-centered">
-              <p><b>Ours (Diffusion)</b></p>
-              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
-            </div>
+            <article class="humanml-slide">
+              <div class="humanml-card">
+                <div class="humanml-prompts">
+                  <div class="prompt-box motion humanml-prompt-box">
+                    <div class="prompt-title">Motion Prompt:</div>
+                    <br><br>
+                    <div class="prompt-text">"a person kicks with the left foot"</div>
+                  </div>
+                  <div class="prompt-box identity humanml-prompt-box">
+                    <div class="prompt-title">Identity Prompt:</div>
+                    <div class="humanml-identity-content">
+                        <img src="./static/images/h3d-4.png" alt="" class="identity-reference-image">
+                      <div class="prompt-text">"a female with a slim build. she is tall, with long torso and legs"</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="humanml-results">
+                  <div class="result-item humanml-result-item">
+                    <h4>Ours</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/h3d/h3d-4-iam.mp4" type="video/mp4"></video>
+                  </div>
+                  <div class="result-item humanml-result-item">
+                    <h4>VQ Based</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/h3d/h3d-4-vq.mp4" type="video/mp4"></video>
+                  </div>
+                  <div class="result-item humanml-result-item">
+                    <h4>Shape My Move</h4>
+                    <video controls muted loop playsinline width="100%"><source src="./static/videos/h3d/h3d-4-smm.mp4" type="video/mp4"></video>
+                  </div>
+                </div>
+              </div>
+            </article>
           </div>
-        </div>
-
-        <div class="content">
-          <h3 class="title is-5">Case 4</h3>
-          <p><b>Motion Prompt:</b> "a person kicks with the left foot"</p>
-          <p><b>Identity Prompt:</b> "a female with a slim build. she is tall, with long torso and legs"</p>
-          <div class="columns">
-            <div class="column has-text-centered">
-              <p><b>Shape My Moves</b></p>
-              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
-            </div>
-            <div class="column has-text-centered">
-              <p><b>Ours (VQ)</b></p>
-              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
-            </div>
-            <div class="column has-text-centered">
-              <p><b>Ours (Diffusion)</b></p>
-              <video controls muted loop playsinline width="100%"><source src="./static/videos/teaser.mp4" type="video/mp4"></video>
-            </div>
-          </div>
+          <button class="humanml-nav next" type="button" aria-label="Next HumanML3D example">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </button>
+          <div class="humanml-dots" aria-label="HumanML3D example navigation"></div>
         </div>
       </div>
     </div>
@@ -391,9 +437,9 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Zero-shot Motion Generation on Unseen IdentityMotion Test Set</h2>
+        <h2 class="title is-3">Zero-shot Generation on Unseen Prompts</h2>
         <div class="content has-text-justified">
-          <p style="color: black; font-style: normal;">
+          <p style="color: #6b7280; font-style: normal;">
             Side-by-side comparison between Shape My Moves and IAM on unseen identities. Identity conditioning
             follows the paper: each example uses a <b>text</b> identity description together with a
             <b>reference image</b> (identity keyframe from the source video).
@@ -412,10 +458,13 @@
                 <div class="zero-shot-left">
                   <div class="prompt-box motion">
                     <div class="prompt-title">Motion Prompt:</div>
+                    <br><br>
                     <div class="prompt-text">"A person jogs forward."</div>
                   </div>
+                  <br><br><br>
                   <div class="prompt-box identity">
                     <div class="prompt-title">Identity Prompt:</div>
+                    <br>
                     <div class="identity-content">
                       <img src="./static/images/jog-female.png" alt="Reference image for identity conditioning (Case 1)." class="identity-reference-image">
                       <div class="prompt-text">"A young adult female with a plus-size, heavy build."</div>
@@ -440,10 +489,13 @@
                 <div class="zero-shot-left">
                   <div class="prompt-box motion">
                     <div class="prompt-title">Motion Prompt:</div>
+                    <br><br>
                     <div class="prompt-text">"A person sits on a bicycle and pedals forward, their legs moving in a continuous, alternating circular motion as they hold the handlebars and ride along a path."</div>
                   </div>
+                  <br><br><br>
                   <div class="prompt-box identity">
                     <div class="prompt-title">Identity Prompt:</div>
+                    <br>
                     <div class="identity-content">
                       <img src="./static/images/bike-female.png" alt="Reference image for identity conditioning (Case 2)." class="identity-reference-image">
                       <div class="prompt-text">"A young adult female with a slim, athletic build. She has dark hair tied back in a ponytail."</div>
@@ -468,10 +520,13 @@
                 <div class="zero-shot-left">
                   <div class="prompt-box motion">
                     <div class="prompt-title">Motion Prompt:</div>
+                    <br><br>
                     <div class="prompt-text">"A person stands holding a long-handled rake. They push the rake forward into a smoking pile on the ground, then pull it back, spreading the ashes. They repeat this motion."</div>
                   </div>
+                  <br><br><br>
                   <div class="prompt-box identity">
                     <div class="prompt-title">Identity Prompt:</div>
+                    <br>
                     <div class="identity-content">
                       <img src="./static/images/rake-male.png" alt="Reference image for identity conditioning (Case 3)." class="identity-reference-image">
                       <div class="prompt-text">"An older adult male with a stocky build, bald on top with hair on the sides."</div>
@@ -502,7 +557,7 @@
                   <br><br><br>
                   <div class="prompt-box identity">
                     <div class="prompt-title"><b>Identity Prompt:</b><br></div>
-                    <br><br>
+                    <br>
                     <div class="identity-content">
                       <img src="./static/images/snow-male.png" alt="Reference image for identity conditioning (Case 4)." class="identity-reference-image">
                       <div class="prompt-text">"An older adult male with a white beard, of average height and build. He is wearing heavy winter clothing, including a parka, snow pants, a hat, and gloves, and is carrying a large backpack."</div>
@@ -540,7 +595,7 @@
       <div class="column is-full-width">
         <h2 class="title is-3">Identity-Controllable Generation</h2>
         <div class="content has-text-justified">
-          <p style="color: black; font-style: normal;">
+          <p style="color: #6b7280; font-style: normal;">
             Given the same motion prompt, IAM generates diverse identity-consistent motions for different body types.
             <!-- Note: image inputs are omitted in this section. -->
           </p>
@@ -587,7 +642,7 @@
 </section>
 
 
-<section class="section" id="BibTeX">
+<section class="section bottom-bg-section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>@article{jia2026iam,
@@ -600,31 +655,17 @@
 </section>
 
 
-<footer class="footer">
+<footer class="footer bottom-bg-section bottom-bg-footer">
   <div class="container">
     <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
     </div>
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
           <p>
-            This website is licensed under a <a rel="license"
+            This webpage template is adapted from <a href="https://github.com/nerfies/nerfies.github.io">NERFies</a>, licensed under a <a rel="license"
                                                 href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
             Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
           </p>
         </div>
       </div>
@@ -634,29 +675,41 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const zeroShotCarousel = document.querySelector('.zero-shot-carousel');
-    if (zeroShotCarousel) {
-      const slides = Array.from(zeroShotCarousel.querySelectorAll('.zero-shot-slide'));
-      const prevBtn = zeroShotCarousel.querySelector('.zero-shot-nav.prev');
-      const nextBtn = zeroShotCarousel.querySelector('.zero-shot-nav.next');
-      const dotsWrap = zeroShotCarousel.querySelector('.zero-shot-dots');
+    function initCarousel(rootSelector, slideSelector, prevSelector, nextSelector, dotsSelector, dotClassName, ariaPrefix) {
+      const root = document.querySelector(rootSelector);
+      if (!root) {
+        return;
+      }
+
+      const slides = Array.from(root.querySelectorAll(slideSelector));
+      const slidesWrap = root.querySelector(slideSelector)?.parentElement;
+      const prevBtn = root.querySelector(prevSelector);
+      const nextBtn = root.querySelector(nextSelector);
+      const dotsWrap = root.querySelector(dotsSelector);
+
+      if (!slides.length || !slidesWrap || !prevBtn || !nextBtn || !dotsWrap) {
+        return;
+      }
+
       let currentIdx = 0;
+      let startX = null;
 
       function renderSlide() {
         slides.forEach(function (slide, idx) {
           slide.classList.toggle('is-active', idx === currentIdx);
         });
-        const dots = Array.from(dotsWrap.querySelectorAll('.zero-shot-dot'));
+        const dots = Array.from(dotsWrap.querySelectorAll('.' + dotClassName));
         dots.forEach(function (dot, idx) {
           dot.classList.toggle('is-active', idx === currentIdx);
         });
       }
 
+      dotsWrap.innerHTML = '';
       slides.forEach(function (_, idx) {
         const dot = document.createElement('button');
         dot.type = 'button';
-        dot.className = 'zero-shot-dot';
-        dot.setAttribute('aria-label', 'Go to zero-shot case ' + (idx + 1));
+        dot.className = dotClassName;
+        dot.setAttribute('aria-label', 'Go to ' + ariaPrefix + ' case ' + (idx + 1));
         dot.addEventListener('click', function () {
           currentIdx = idx;
           renderSlide();
@@ -674,8 +727,77 @@
         renderSlide();
       });
 
+      slidesWrap.addEventListener('touchstart', function (event) {
+        if (event.touches.length !== 1) {
+          startX = null;
+          return;
+        }
+        startX = event.touches[0].clientX;
+      }, { passive: true });
+
+      slidesWrap.addEventListener('touchend', function (event) {
+        if (startX === null || !event.changedTouches.length) {
+          return;
+        }
+        const deltaX = event.changedTouches[0].clientX - startX;
+        startX = null;
+        if (Math.abs(deltaX) < 40) {
+          return;
+        }
+        currentIdx = deltaX < 0
+          ? (currentIdx + 1) % slides.length
+          : (currentIdx - 1 + slides.length) % slides.length;
+        renderSlide();
+      });
+
+      slidesWrap.addEventListener('pointerdown', function (event) {
+        if (event.pointerType === 'mouse' && event.button !== 0) {
+          return;
+        }
+        startX = event.clientX;
+      });
+
+      slidesWrap.addEventListener('pointerup', function (event) {
+        if (startX === null) {
+          return;
+        }
+        const deltaX = event.clientX - startX;
+        startX = null;
+        if (Math.abs(deltaX) < 50) {
+          return;
+        }
+        currentIdx = deltaX < 0
+          ? (currentIdx + 1) % slides.length
+          : (currentIdx - 1 + slides.length) % slides.length;
+        renderSlide();
+      });
+
+      slidesWrap.addEventListener('pointercancel', function () {
+        startX = null;
+      });
+
       renderSlide();
     }
+
+    initCarousel(
+      '.humanml-carousel',
+      '.humanml-slide',
+      '.humanml-nav.prev',
+      '.humanml-nav.next',
+      '.humanml-dots',
+      'humanml-dot',
+      'HumanML3D'
+    );
+
+    initCarousel(
+      '.zero-shot-carousel',
+      '.zero-shot-slide',
+      '.zero-shot-nav.prev',
+      '.zero-shot-nav.next',
+      '.zero-shot-dots',
+      'zero-shot-dot',
+      'zero-shot'
+    );
 
     const videos = document.querySelectorAll('video');
     videos.forEach(function (video) {
